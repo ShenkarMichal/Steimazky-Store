@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
+import { RouteNotFoundErrorModel } from '../4-models/errors-model'
 
 
 function routeNotFound(request: Request, response: Response, next: NextFunction) {
