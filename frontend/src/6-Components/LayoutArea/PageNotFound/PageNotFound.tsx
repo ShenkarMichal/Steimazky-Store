@@ -4,6 +4,8 @@ function PageNotFound(): JSX.Element{
     return(
         <div className="PageNotFound">
 
+            <span>Oops.. Page Not Found</span>
+
         </div>
     )
 }
