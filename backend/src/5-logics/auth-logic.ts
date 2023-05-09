@@ -11,13 +11,15 @@ async function login(user:UserModel): Promise<string> {
     const info:OkPacket = await dal.execute(sql, [user.firstName, user.lastName, user.username, user.password])
     user.userId = info.insertId
 
-    const token = cyber.getNewToken(user)   
+    const token = cyber.getNewToken(user) 
+    return token  
 }
 
 async function register(credential:CredentialsModel): Promise<string> {
     const sql = `SELECT * FROM users WHERE username = ? AND password = ?`
     const user = await dal.execute(sql, [credential.username, credential.password])
     if(!user[0]) throw new UnAuthorizedErrorModel("The username or password incorrect")
+    
     const token = cyber.getNewToken(user[0])
     return token    
 }
