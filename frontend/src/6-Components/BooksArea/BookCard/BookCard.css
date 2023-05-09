@@ -1,0 +1,12 @@
+.BookCard {
+    border: 2px double white;
+    border-radius: 10px;
+    width:max-content;
+    height: fit-content;
+    background-color: gray;
+    overflow: auto;
+    display: inline-block;
+    padding: 20px;
+    margin: 10px;
+    font-size: larger;
+}
