@@ -12,9 +12,7 @@ const root = ReactDOM.createRoot(
 interceptorService.createInterceptor()
 root.render(
   <BrowserRouter>
-    <React.StrictMode>
       <Layout />
-    </React.StrictMode>
   </BrowserRouter>
 );
 

@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express'
 import booksLogic from '../5-logics/books-logic'
 import BooksModel from '../4-models/books-model'
+import isLoggedIn from '../3-middlewares/is-logged-in'
 
 const router = express.Router()
 
@@ -16,7 +17,7 @@ router.get("/books-types", async (request: Request, response: Response, next: Ne
 })
 
 //Get all books
-router.get("/books", async (request: Request, response: Response, next: NextFunction)=>{
+router.get("/books", isLoggedIn, async (request: Request, response: Response, next: NextFunction)=>{
     try {
         const books = await booksLogic.getAllBooks()
         response.json(books)    
