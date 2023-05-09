@@ -13,3 +13,9 @@ export class ResourceNotFoundErrorModel extends ErrorsModel {
         super(404, `The id: ${id}, is not exists`)
     }
 }
+
+export class UnAuthorizedErrorModel extends ErrorsModel {
+    public constructor(msg: string){
+        super(400, msg)
+    }
+}
