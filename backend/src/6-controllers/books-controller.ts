@@ -14,4 +14,15 @@ router.get("/books-types", async (request: Request, response: Response, next: Ne
     }
 })
 
+//Get all books
+router.get("/books", async (request: Request, response: Response, next: NextFunction)=>{
+    try {
+        const books = await booksLogic.getAllBooks()
+        response.json(books)    
+    }
+    catch (err: any) {
+        next(err)        
+    }
+})
+
 export default router
