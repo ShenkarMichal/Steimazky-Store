@@ -1,3 +1,4 @@
+import { OkPacket } from "mysql";
 import dal from "../2-utils/dal";
 import BookTypeModel from "../4-models/book-type-model";
 import BooksModel from "../4-models/books-model";
@@ -16,7 +17,17 @@ async function getAllBooks(): Promise<BooksModel[]> {
     return books    
 }
 
+async function addNewBook(newBook:BooksModel): Promise<BooksModel> {
+    const sql = `INSERT INTO books
+                VALUES(DEFAULT, ?,?,?,?,?)`
+    const info:OkPacket = await dal.execute(sql, [newBook.bookName, newBook.bookSummary, newBook.bookTypeId,
+                                                    newBook.bookPrice, newBook.bookStock])
+    newBook.bookId = info.insertId
+    return newBook    
+}
+
 export default {
     getAllTypes,
-    getAllBooks
+    getAllBooks,
+    addNewBook
 }
