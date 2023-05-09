@@ -6,6 +6,8 @@ class BooksModel {
     public bookPrice: string //Decimal
     public bookStock: number
 
+    public bookTypeName : string
+
 }
 
 export default BooksModel
