@@ -6,10 +6,10 @@ import CredentialsModel from '../4-models/credentials-model'
 const router = express.Router()
 
 //Login
-router.post("/login", async (request: Request, response: Response, next: NextFunction)=>{
+router.post("/register", async (request: Request, response: Response, next: NextFunction)=>{
     try {
         const user = new UserModel(request.body)
-        const token = await authLogic.login(user)
+        const token = await authLogic.register(user)
         response.status(201).json(token)        
     }
     catch (err: any) {
@@ -18,10 +18,10 @@ router.post("/login", async (request: Request, response: Response, next: NextFun
 })
 
 //Register
-router.post("/register", async (request: Request, response: Response, next: NextFunction)=>{
+router.post("/login", async (request: Request, response: Response, next: NextFunction)=>{
     try {
         const credential = new CredentialsModel(request.body)
-        const token = await authLogic.register(credential)
+        const token = await authLogic.login(credential)
         response.json(token)        
     }
     catch (err: any) {
