@@ -2,6 +2,7 @@ import { OkPacket } from "mysql";
 import dal from "../2-utils/dal";
 import BookTypeModel from "../4-models/book-type-model";
 import BooksModel from "../4-models/books-model";
+import { ResourceNotFoundErrorModel } from "../4-models/errors-model";
 
 async function  getAllTypes(): Promise<BookTypeModel[]> {
     const sql = "SELECT * FROM booktype"
@@ -26,8 +27,16 @@ async function addNewBook(newBook:BooksModel): Promise<BooksModel> {
     return newBook    
 }
 
+async function deleteBook(bookId:number): Promise<void> {
+    const sql = `DELETE FROM books
+                WHERE bookId = ?`
+    const info: OkPacket = await dal.execute(sql, [bookId])
+    if(info.affectedRows === 0) throw new ResourceNotFoundErrorModel(bookId)    
+}
+
 export default {
     getAllTypes,
     getAllBooks,
-    addNewBook
+    addNewBook,
+    deleteBook
 }
