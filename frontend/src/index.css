@@ -6,3 +6,38 @@ body, html, #root {
   text-align: center;
   color: white;
 }
+
+form {
+  border: 2px solid white;
+  border-radius: 20px;
+  background-color: gray;
+  font-size: larger;
+  width: max-content;
+  height: max-content;
+  margin: auto;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+input, select, textarea {
+  width: 90%;
+  margin: 5px;
+}
+
+button {
+  border-radius: 5px;
+  background-color: orange;
+  color: white;
+  margin-top: 10px;
+  font-size: larger;
+}
+
+a {
+  font-size: larger;
+  color: white;
+  margin: 50px;
+}
+
+a:hover {
+  color: orangered;
+}
