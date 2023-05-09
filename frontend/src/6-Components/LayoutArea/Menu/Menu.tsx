@@ -4,7 +4,7 @@ import "./Menu.css"
 function Menu(): JSX.Element{
     return(
         <div className="Menu">
-            <NavLink to={"/books"}>Home</NavLink> <br />
+            <NavLink to={"/books"}>Home</NavLink> <br /> <br />
             <NavLink to={"/add-book"}>Add Book</NavLink>
 
         </div>

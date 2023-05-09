@@ -2,7 +2,8 @@
     height: 100%;
     display: grid;
     grid-template-rows: 15% 80% 5%;
-    grid-template-columns: repeat(1fr, 6);
+    grid-template-columns: repeat(6, 1fr);
+    box-sizing: border-box;
     
 }
 
@@ -12,6 +13,8 @@
 
 .Layout > main {
     grid-column: span 5;
+    overflow: auto;
+
 }
 
 .Layout > * {

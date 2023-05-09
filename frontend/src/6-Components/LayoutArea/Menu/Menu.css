@@ -1,0 +1,20 @@
+.Menu > a {
+    font-size: larger;
+    color: white;
+    margin: 50px;
+}
+
+.Menu > a:hover {
+    color: orangered;
+}
+
+.Menu > .active {
+    font-style: oblique;
+    color: orangered;
+}
+
+.Menu {
+    width: max-content;
+    overflow: hidden;
+    text-align: center;
+}

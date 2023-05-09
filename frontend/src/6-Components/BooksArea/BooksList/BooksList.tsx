@@ -12,7 +12,7 @@ function BooksList(): JSX.Element{
         booksService.getAllBooks()
             .then(b=>setBooks(b))
             .catch(err => alert(err))
-    },[])
+    },[books])
 
     return(
         <div className="BooksList">
