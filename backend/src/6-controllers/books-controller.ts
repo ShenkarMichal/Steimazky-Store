@@ -39,11 +39,11 @@ router.post("/books", async (request: Request, response: Response, next: NextFun
 })
 
 //Delete book
-router.delete("/books/:bookId([0-9]+)", async (request: Request, response: Response, next: NextFunction)=>{
+router.delete("/books/:bookId", async (request: Request, response: Response, next: NextFunction)=>{
     try {
         const bookId = +request.params.bookId
         await booksLogic.deleteBook(bookId)
-        response.status(204)
+        response.sendStatus(204)
     }
     catch (err: any) {
         next(err)        
