@@ -6,6 +6,7 @@ import CredentialsModel from "../4-models/credentials-model";
 import { UnAuthorizedErrorModel } from "../4-models/errors-model";
 
 async function register(user:UserModel): Promise<string> {
+    user.password = cyber.hash(user.password)
     const sql = `INSERT INTO users
                 VALUES(DEFAULT, ?,?,?,?)`
     const info:OkPacket = await dal.execute(sql, [user.firstName, user.lastName, user.username, user.password])
@@ -16,6 +17,7 @@ async function register(user:UserModel): Promise<string> {
 }
 
 async function login(credential:CredentialsModel): Promise<string> {
+    credential.password = cyber.hash(credential.password)
     const sql = `SELECT * FROM users WHERE username = ? AND password = ?`
     const user = await dal.execute(sql, [credential.username, credential.password])
     if(!user[0]) throw new UnAuthorizedErrorModel("The username or password incorrect")

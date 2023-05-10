@@ -1,10 +1,13 @@
 import Jwt from 'jsonwebtoken'
 import UserModel from '../4-models/user-model';
 import { Request } from 'express';
+import crypto from "crypto"
 
 const secretKey = "SteimazkyStore-MichalShenkar"
 
 function getNewToken(user: UserModel): string {
+
+    delete user.password
 
     const container = { user }
     const options = {expiresIn: "3h"}
@@ -41,7 +44,18 @@ function verifyToken(request: Request): Promise<Boolean> {
     })
 }
 
+const salt = "steimazkyStoreSalt"
+function hash(text: string): string {
+    if(!text) return null
+
+    const hashText = crypto.createHmac("sha512", salt).update(text).digest("hex")
+
+    return hashText
+
+}
+
 export default {
     getNewToken,
-    verifyToken
+    verifyToken,
+    hash
 }

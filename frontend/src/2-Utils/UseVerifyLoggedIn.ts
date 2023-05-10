@@ -8,7 +8,6 @@ function useVerifyLoggedIn() {
 
         if(!sessionStorage.getItem("token")){
             alert("You are not logged in!")
-            navigate("/auth/login")
         }
 
     },[])
