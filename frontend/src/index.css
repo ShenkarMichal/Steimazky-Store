@@ -24,7 +24,7 @@ input, select, textarea {
   margin: 5px;
 }
 
-button {
+.Login button, .Register button, .BookCard button {
   border-radius: 5px;
   background-color: orange;
   color: white;

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import BooksModel from "../../../3-Models/BooksModel"
 import booksService from "../../../4-Service/BooksService"
 import "./BookCard.css"
+import notify from "../../../4-Service/NotifyService"
 
 interface BookCardProps {
     book: BooksModel
@@ -14,11 +15,11 @@ function BookCard(props: BookCardProps): JSX.Element{
     async function deleteBook(bookId:number): Promise<void> {
         try {
             await booksService.deleteBook(bookId)    
-            alert("The book has been successfully deleted")
+            notify.success("The book has been successfully deleted")
             navigate("/books")
         }
         catch (err: any) {
-            alert(err)        
+            notify.error(err)        
         }    
     }
 

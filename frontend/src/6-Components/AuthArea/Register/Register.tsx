@@ -4,6 +4,7 @@ import UserModel from "../../../3-Models/UserModel"
 import authService from "../../../4-Service/Auth-Service"
 import { useNavigate } from "react-router-dom"
 import { NavLink } from "react-router-dom"
+import notify from "../../../4-Service/NotifyService"
 
 function Register(): JSX.Element{
 
@@ -13,11 +14,11 @@ function Register(): JSX.Element{
     async function addUser(user:UserModel) {
         try {
             await authService.register(user)
-            alert("Wellcome!!")
+            notify.success("Wellcome!!")
             navigate("/books")            
         }
         catch (err: any) {
-            alert(err)            
+            notify.error(err)            
         }
     }
 

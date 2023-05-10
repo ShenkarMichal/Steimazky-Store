@@ -15,6 +15,7 @@ class AuthService {
     public async login(credential:CredentialsModel): Promise<void> {
         const response = await axios.post<string>(appConfig.loginURL, credential)
         const token = response.data
+        console.log(token)
         sessionStorage.setItem("token", token)  
     }
 

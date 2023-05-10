@@ -5,11 +5,10 @@ import { useNavigate } from "react-router-dom"
 import booksService from "../../../4-Service/BooksService"
 import BookTypeModel from "../../../3-Models/BookTypeModel"
 import { useEffect, useState } from "react"
-import useVerifyLoggedIn from "../../../2-Utils/UseVerifyLoggedIn"
+import notify from "../../../4-Service/NotifyService"
 
 function AddBook(): JSX.Element{
 
-    useVerifyLoggedIn()
 
     const {register, handleSubmit} = useForm<BooksModel>()
     const navigate = useNavigate()
@@ -18,17 +17,17 @@ function AddBook(): JSX.Element{
     useEffect(()=>{
         booksService.getAllTypes()
             .then(t => setTypes(t))
-            .catch(err => console.log(err))
+            .catch(err => notify.error(err))
     },[])
 
     async function addBook(newBook: BooksModel){
         try {
             await booksService.addNewBook(newBook)
-            alert("The new book has been successfully adding")
+            notify.success("The new book has been successfully adding")
             navigate("/books")            
         }
         catch (err: any) {
-            alert(err)            
+           notify.error(err)            
         }
     }
 
