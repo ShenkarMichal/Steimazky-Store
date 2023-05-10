@@ -8,7 +8,7 @@ import notify from "../../../4-Service/NotifyService"
 
 function Login():JSX.Element {
 
-    const {register, handleSubmit} = useForm<CredentialsModel>()
+    const {register, handleSubmit, formState} = useForm<CredentialsModel>()
     const navigate = useNavigate()
 
     async function sendLogin(credentials:CredentialsModel) {
@@ -27,10 +27,12 @@ function Login():JSX.Element {
             <NavLink to={"/auth/register"}>Dont have account?</NavLink>
             <form onSubmit={handleSubmit(sendLogin)}>
                 <label>username:</label>
-                <input type="text" {...register("username")} /> <br />
+                <input type="text" {...register("username", CredentialsModel.usernameValidatoin)} /> <br />
+                <span className="ErrorMsg">{formState.errors.username?.message}</span> <br />
 
                 <label>Password:</label>
-                <input type="text" {...register("password")} /> <br />
+                <input type="text" {...register("password", CredentialsModel.passwordValidatoin)} /> <br />
+                <span className="ErrorMsg">{formState.errors.password?.message}</span> <br />
 
                 <button>Login</button>
                 

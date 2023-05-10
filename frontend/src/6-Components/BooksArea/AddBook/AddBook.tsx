@@ -36,12 +36,13 @@ function AddBook(): JSX.Element{
             <form onSubmit={handleSubmit(addBook)}>
                 <label>Name:</label>
                 <input type="text" {...register("bookName", BooksModel.nameVlidation )} required/> <br />
-                <span className="ErrorMsg">{formState.errors.bookName?.message}</span>
+                <span className="ErrorMsg">{formState.errors.bookName?.message}</span> <br />
 
                 <label>Summary:</label>
                 <textarea {...register("bookSummary", BooksModel.summaryVlidation)} required></textarea>  <br />
-                <span className="ErrorMsg">{formState.errors.bookSummary?.message}</span>
+                <span className="ErrorMsg">{formState.errors.bookSummary?.message}</span> <br />
 
+                <label>Select Type</label>
                 <select {...register("bookTypeId")} required>
                     <option></option>
                     {types.map(t => 
@@ -50,11 +51,11 @@ function AddBook(): JSX.Element{
 
                 <label>Price:</label>
                 <input type="text" {...register("bookPrice", BooksModel.priceVlidation)} required/> <br />
-                <span className="ErrorMsg">{formState.errors.bookPrice?.message}</span>
+                <span className="ErrorMsg">{formState.errors.bookPrice?.message}</span> <br />
 
                 <label>Stock:</label>
                 <input type="text" {...register("bookStock", BooksModel.stockVlidation)} required/> <br />
-                <span className="ErrorMsg">{formState.errors.bookStock?.message}</span>
+                <span className="ErrorMsg">{formState.errors.bookStock?.message}</span> <br />
 
                 <button>Add Book</button>
 

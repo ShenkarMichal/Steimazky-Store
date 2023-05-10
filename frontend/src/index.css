@@ -41,3 +41,11 @@ a {
 a:hover {
   color: orangered;
 }
+
+.ErrorMsg {
+  color: red;
+  font-size: medium;
+  font-weight: bolder;
+  
+ 
+}

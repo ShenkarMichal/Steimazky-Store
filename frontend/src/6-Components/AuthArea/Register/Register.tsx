@@ -8,7 +8,7 @@ import notify from "../../../4-Service/NotifyService"
 
 function Register(): JSX.Element{
 
-    const {register, handleSubmit} = useForm<UserModel>()
+    const {register, handleSubmit, formState} = useForm<UserModel>()
     const navigate = useNavigate()
 
     async function addUser(user:UserModel) {
@@ -28,16 +28,20 @@ function Register(): JSX.Element{
             <NavLink to={"/auth/login"}>Do you have account?</NavLink>
             <form onSubmit={handleSubmit(addUser)}>
                 <label>First Name:</label>
-                <input type="text" {...register("firstName")} /> <br />
+                <input type="text" {...register("firstName", UserModel.firstNameValidatoin)} /> <br />
+                <span className="ErrorMsg">{formState.errors.firstName?.message}</span> <br />
 
                 <label>Last Name:</label>
-                <input type="text" {...register("lastName")} /> <br />
+                <input type="text" {...register("lastName", UserModel.lastNameValidatoin)} /> <br />
+                <span className="ErrorMsg">{formState.errors.lastName?.message}</span> <br />
 
                 <label>username:</label>
-                <input type="text" {...register("username")} /> <br />
+                <input type="text" {...register("username", UserModel.usernameValidatoin)} /> <br />
+                <span className="ErroMsg">{formState.errors.username?.message}</span> <br />
 
                 <label>Password:</label>
-                <input type="text" {...register("password")} /> <br />
+                <input type="text" {...register("password", UserModel.passwordValidatoin)} /> <br />
+                <span className="ErrorMsg">{formState.errors.password?.message}</span> <br />
 
                 <button>Register</button>
             </form>
