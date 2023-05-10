@@ -1,3 +1,5 @@
+import Joi from "joi"
+
 class UserModel {
     public userId: number
     public firstName: string
@@ -11,6 +13,19 @@ class UserModel {
         this.lastName = user.lastName
         this.username = user.username
         this.password = user.password
+    }
+
+    public static validationSchema = Joi.object({
+        userId: Joi.number().optional().integer().positive(),
+        firstName: Joi.string().required().min(3).max(10),
+        lastName: Joi.string().required().min(3).max(10),
+        username: Joi.string().required().min(3).max(10),
+        password: Joi.string().required().min(6).max(20)
+    })
+
+    public validate(): string {
+        const resoult = UserModel.validationSchema.validate(this)
+        return resoult.error?.message
     }
 }
 
