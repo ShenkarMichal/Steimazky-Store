@@ -3,7 +3,7 @@ import cyber from "../2-utils/cyber";
 import dal from "../2-utils/dal";
 import UserModel from "../4-models/user-model";
 import CredentialsModel from "../4-models/credentials-model";
-import { UnAuthorizedErrorModel } from "../4-models/errors-model";
+import { UnAuthorizedErrorModel, ValidateErrorModel } from "../4-models/errors-model";
 
 async function isUsernameExists(username: string): Promise<Boolean> {
     const sql = "SELECT COUNT(*) AS isUser FROM users WHERE username = ?"
@@ -14,6 +14,10 @@ async function isUsernameExists(username: string): Promise<Boolean> {
 }
 
 async function register(user:UserModel): Promise<string> {
+    //Validation
+    const err = user.validate()
+    if(err) throw new ValidateErrorModel(err)
+
     if(await isUsernameExists(user.username)) throw new UnAuthorizedErrorModel("The username already exists")
     user.password = cyber.hash(user.password)
     const sql = `INSERT INTO users
@@ -26,6 +30,11 @@ async function register(user:UserModel): Promise<string> {
 }
 
 async function login(credential:CredentialsModel): Promise<string> {
+
+    //Validation
+    const err = credential.validate()
+    if(err) throw new ValidateErrorModel(err)
+    
     credential.password = cyber.hash(credential.password)
     const sql = `SELECT * FROM users WHERE username = ? AND password = ?`
     const user = await dal.execute(sql, [credential.username, credential.password])

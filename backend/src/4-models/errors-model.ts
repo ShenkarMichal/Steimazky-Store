@@ -19,3 +19,9 @@ export class UnAuthorizedErrorModel extends ErrorsModel {
         super(400, msg)
     }
 }
+
+export class ValidateErrorModel extends ErrorsModel {
+    public constructor(msg: string) {
+        super(400, msg)
+    }
+}

@@ -2,7 +2,7 @@ import { OkPacket } from "mysql";
 import dal from "../2-utils/dal";
 import BookTypeModel from "../4-models/book-type-model";
 import BooksModel from "../4-models/books-model";
-import { ResourceNotFoundErrorModel } from "../4-models/errors-model";
+import { ResourceNotFoundErrorModel, ValidateErrorModel } from "../4-models/errors-model";
 
 async function  getAllTypes(): Promise<BookTypeModel[]> {
     const sql = "SELECT * FROM booktype"
@@ -19,6 +19,11 @@ async function getAllBooks(): Promise<BooksModel[]> {
 }
 
 async function addNewBook(newBook:BooksModel): Promise<BooksModel> {
+
+    //Validation
+    const err = newBook.validate()
+    if(err) throw new ValidateErrorModel(err)
+    
     const sql = `INSERT INTO books
                 VALUES(DEFAULT, ?,?,?,?,?)`
     const info:OkPacket = await dal.execute(sql, [newBook.bookName, newBook.bookSummary, newBook.bookTypeId,
