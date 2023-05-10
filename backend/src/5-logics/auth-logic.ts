@@ -5,7 +5,16 @@ import UserModel from "../4-models/user-model";
 import CredentialsModel from "../4-models/credentials-model";
 import { UnAuthorizedErrorModel } from "../4-models/errors-model";
 
+async function isUsernameExists(username: string): Promise<Boolean> {
+    const sql = "SELECT COUNT(*) AS isUser FROM users WHERE username = ?"
+    const info = await dal.execute(sql, [username])
+    const count = info[0].isUser
+    console.log(count)
+    return count > 0    
+}
+
 async function register(user:UserModel): Promise<string> {
+    if(await isUsernameExists(user.username)) throw new UnAuthorizedErrorModel("The username already exists")
     user.password = cyber.hash(user.password)
     const sql = `INSERT INTO users
                 VALUES(DEFAULT, ?,?,?,?)`
