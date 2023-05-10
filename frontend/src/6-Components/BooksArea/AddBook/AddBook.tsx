@@ -10,7 +10,7 @@ import notify from "../../../4-Service/NotifyService"
 function AddBook(): JSX.Element{
 
 
-    const {register, handleSubmit} = useForm<BooksModel>()
+    const {register, handleSubmit, formState} = useForm<BooksModel>()
     const navigate = useNavigate()
 
     const [types, setTypes] = useState<BookTypeModel[]>([])
@@ -35,10 +35,12 @@ function AddBook(): JSX.Element{
         <div className="AddBook">
             <form onSubmit={handleSubmit(addBook)}>
                 <label>Name:</label>
-                <input type="text" {...register("bookName")} required/> <br />
+                <input type="text" {...register("bookName", BooksModel.nameVlidation )} required/> <br />
+                <span className="ErrorMsg">{formState.errors.bookName?.message}</span>
 
                 <label>Summary:</label>
-                <textarea {...register("bookSummary")} required></textarea>  <br />
+                <textarea {...register("bookSummary", BooksModel.summaryVlidation)} required></textarea>  <br />
+                <span className="ErrorMsg">{formState.errors.bookSummary?.message}</span>
 
                 <select {...register("bookTypeId")} required>
                     <option></option>
@@ -47,10 +49,12 @@ function AddBook(): JSX.Element{
                 </select>
 
                 <label>Price:</label>
-                <input type="text" {...register("bookPrice")} required/> <br />
+                <input type="text" {...register("bookPrice", BooksModel.priceVlidation)} required/> <br />
+                <span className="ErrorMsg">{formState.errors.bookPrice?.message}</span>
 
                 <label>Stock:</label>
-                <input type="text" {...register("bookStock")} required/> <br />
+                <input type="text" {...register("bookStock", BooksModel.stockVlidation)} required/> <br />
+                <span className="ErrorMsg">{formState.errors.bookStock?.message}</span>
 
                 <button>Add Book</button>
 
