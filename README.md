@@ -1,5 +1,5 @@
 # Steimazky-Store
-A book-store application
+A books-store application
 
 Backend: MySQL, Node.js(Express) -> TypeScript
 
